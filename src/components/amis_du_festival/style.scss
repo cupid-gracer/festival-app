@@ -2,7 +2,7 @@
     .action {
         display: flex;
         justify-content: end;
-        margin-right: 30px;
+        margin-right: 20%;
 
         .btn_continue {
             background-color: black;
@@ -30,7 +30,7 @@
 
     .tab_header {
         border-bottom: 1px solid black;
-        padding: 0 10% 0 10%;
+        padding: 0 20% 0 20%;
 
         @media screen and (max-width: 1100px) {
             padding: 0 60px 0 60px;
@@ -58,7 +58,7 @@
     }
 
     .tab_body {
-        padding: 0 9% 0 9%;
+        padding: 0 20% 0 20%;
         display: flex;
         // align-items: center;
         justify-content: space-between;

@@ -43,16 +43,21 @@ function Perk_detail(props){
 function Amis_du_festifal(){
     const [donates, setDonates] = useState(data[0]['donations'])
     const [description, setDescription] = useState(donates[0])
-    const [perks_list_class, setPerks_list_class] = useState(donates[0])
+    const [perks_list_class, setPerks_list_class] = useState(data[0]['donations'].length>5?"perks_list grid":"perks_list")
+    const [activeTab, setActiveTab] = useState(0);
+    const [activePerkBtn, setActivePerkBtn] = useState(0);
+
     const changeTab = (e, i) => {
         let _perks_list_class = data[i]['donations'].length>5?"perks_list grid":"perks_list";
         setPerks_list_class(_perks_list_class)
         setDonates(data[i]['donations'])
         setDescription(data[i]['donations'][0])
+        setActiveTab(i)
     }
 
     const changeLevel = (i) => {
         setDescription(donates[i])
+        setActivePerkBtn(i)
         console.log(donates.length)
     }
 
@@ -61,7 +66,10 @@ function Amis_du_festifal(){
             <div className="tab_header">
                 <div className="tab_description">Choose Your Donate Frequency</div>
                 <div className="tabs">
-                    {data.map((tab, i)=><Tab_btn key={i} name={tab.tab_name} onClick={(event)=>changeTab(event, i)} />)}
+                    {data.map((tab, i)=>{
+                        let active = activeTab == i? true:false;
+                        return <Tab_btn key={i} name={tab.tab_name} active={active} onClick={(event)=>changeTab(event, i)} />
+                    })}
                 </div>
             </div>
             <div className="tab_body">
@@ -70,8 +78,8 @@ function Amis_du_festifal(){
                     <div className={perks_list_class}>
                         {donates.map((donate, i)=>{
                             const name = "$" + donate['level'];
-                            const grid = donates.length>5?"grid":"";
-                            return <Perk_btn  key={i} name={name}  onClick={() => changeLevel( i)}/>
+                            let active = activePerkBtn == i? true:false;
+                            return <Perk_btn  key={i} name={name} active={active} onClick={() => changeLevel( i)}/>
                         })}
                     </div>
                 </div>
